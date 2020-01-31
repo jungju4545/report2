@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <!-- namespace규칙이 있다 -->
+   <!-- mapper를 설정했으면 닫아야지.... </mapper>안하면 못읽는다... 한시간동안 삽질했네... -->
+<mapper namespace="com.script.script.repository.PlayerRepository">
+
+<!-- Player 와 Team의 join할때 mapping 방법 -->
+
+ <resultMap id="resultTeam" type="com.script.script.model.Team">
+<id property="id" column="id"/>
+<result property="tName" column="tName"/>
+<result property="tYear" column="tYear"/>
+<collection property="players" resultMap="resultPlayer"/>
+</resultMap>
+
+<resultMap id="resultPlayer" type="com.script.script.model.Player">
+<id property="id" column="id"/>
+<result property="pName" column="pName"/>
+<result property="pNo" column="pNo"/>
+<result property="pTeamId" column="pTeamId"/>
+<result property="pAge" column="pAge"/>
+</resultMap> 
+
+
+<select id="findByTeam" resultMap="resultTeam">
+SELECT*
+from player p join team t
+on p.pTeamId=t.id
+where t.id=#{type}
+</select>
+
+<select id="findAll" resultMap="resultTeam">
+SELECT*
+from player p join team t
+on p.pTeamId=t.id
+</select>
+
+
+</mapper>
