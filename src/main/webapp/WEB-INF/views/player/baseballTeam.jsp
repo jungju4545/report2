@@ -43,7 +43,10 @@
 <script>
 var type=0
 var count=0
+
 $("#lotte").click(function(){
+	count++;
+	if(count%2==1){
 type=1
 	$.ajax({
 		method:"GET",
@@ -57,71 +60,164 @@ type=1
 				alert("error")
 			}
 		});
+	}
+	else{
+		type=1
+		$.ajax({
+			method:"GET",
+			url:"testplayer?type="+type,
+			dataType:'json',
+			success:function(data){
+				$(".lotteMember").remove();
+				$(".newTbody").remove();
+				},
+			error:function(data){
+					alert("error")
+				}
+			});
+		}
+	
 });
 
 $("#samsung").click(function(){
-	type=2
+	count++;
+	if(count%2==1){
+type=2
+	$.ajax({
+		method:"GET",
+		url:"testplayer?type="+type,
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			createTable(data);
+			},
+		error:function(data){
+				alert("error")
+			}
+		});
+	}
+	else{
+		type=2
 		$.ajax({
 			method:"GET",
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				console.log(data);
-				createTable(data);
+				$(".lotteMember").remove();
+				$(".newTbody").remove();
 				},
 			error:function(data){
 					alert("error")
 				}
 			});
-	});
+		}
+	
+});
 
 $("#KIA").click(function(){
-	type=3
+	count++;
+	if(count%2==1){
+type=3
+	$.ajax({
+		method:"GET",
+		url:"testplayer?type="+type,
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			createTable(data);
+			},
+		error:function(data){
+				alert("error")
+			}
+		});
+	}
+	else{
+		type=3
 		$.ajax({
 			method:"GET",
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				
-				createTable(data);
+				$(".lotteMember").remove();
+				$(".newTbody").remove();
 				},
 			error:function(data){
 					alert("error")
 				}
 			});
-	});
+		}
+	
+});
 
 $("#SK").click(function(){
-	type=4
+	count++;
+	if(count%2==1){
+type=4
+	$.ajax({
+		method:"GET",
+		url:"testplayer?type="+type,
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			createTable(data);
+			},
+		error:function(data){
+				alert("error")
+			}
+		});
+	}
+	else{
+		type=4
 		$.ajax({
 			method:"GET",
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				console.log(data);
-				createTable(data);
+				$(".lotteMember").remove();
+				$(".newTbody").remove();
 				},
 			error:function(data){
 					alert("error")
 				}
 			});
-	});
+		}
+	
+});
 
 $("#han").click(function(){
-	type=5
+	count++;
+	if(count%2==1){
+type=5
+	$.ajax({
+		method:"GET",
+		url:"testplayer?type="+type,
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			createTable(data);
+			},
+		error:function(data){
+				alert("error")
+			}
+		});
+	}
+	else{
+		type=5
 		$.ajax({
 			method:"GET",
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				console.log(data);
-				createTable(data);
+				$(".lotteMember").remove();
+				$(".newTbody").remove();
 				},
 			error:function(data){
 					alert("error")
 				}
 			});
-	});
+		}
+	
+});
 
 function createTable(data){
 	$(".lotteMember").remove();
@@ -130,18 +226,23 @@ function createTable(data){
 	$(".originTable").append($newTbody);
 
 	 for(let list of data){
-		
+	//<a href="/player/detail/${list.players[0].pname}"></a>
 		let $newRow=$(
 				"<tr>"+
-				   "<td>"+list.players.pName+"</td>"+
-				   "<td>"+list.players.pNo+"</td>"+
+				   "<td>"+list.players[0].pname+"</td>"+
+				   "<td>"+list.players[0].pno+"</td>"+
 					"<td>"+list.tname+"</td>"+
-					"<td>"+list.players.pAge+"</td>"+
+					"<td>"+list.players[0].page+"</td>"+
 					"</tr>"
 				);
 		$newTbody.append($newRow);
 	}
-	
+	/* for(let list of data){
+		var players=list.players[0];
+			console.log("선수이름"+players.id);
+			console.log("선수나이"+players.pname);
+			console.log("선수번호"+players[0]);
+		} */
 	
 }
 </script>
