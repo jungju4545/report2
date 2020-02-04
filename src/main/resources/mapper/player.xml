@@ -9,7 +9,7 @@
 <!-- Player 와 Team의 join할때 mapping 방법 -->
 
  <resultMap id="resultTeam" type="com.script.script.model.Team">
-<id property="id" column="id"/>
+<id property="tid" column="tid"/>
 <result property="tName" column="tName"/>
 <result property="tYear" column="tYear"/>
 <collection property="players" resultMap="resultPlayer"/>
@@ -27,14 +27,20 @@
 <select id="findByTeam" resultMap="resultTeam">
 SELECT*
 from player p join team t
-on p.pTeamId=t.id
-where t.id=#{type}
+on p.pTeamId=t.tid
+where t.tid=#{type}
 </select>
 
 <select id="findAll" resultMap="resultTeam">
 SELECT*
 from player p join team t
-on p.pTeamId=t.id
+on p.pTeamId=t.tid
+</select>
+
+<select id="findById" resultMap="resultTeam">
+SELECT * FROM 	player p join team t
+on p.pTeamId=t.tid
+where id = #{id};
 </select>
 
 

@@ -9,12 +9,12 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-	div{
+	div>.team{
 	float:left;
 		}
 </style>
 <body>
-
+<div class="team">
 <ul>
 <li>롯데<input id="lotte" type="checkbox" value="1"></li>
 <li>삼성<input id="samsung" type="checkbox" value="2"></li>
@@ -22,31 +22,29 @@
 <li>SK<input id="SK" type="checkbox" value="4"></li>
 <li>한화<input id="han" type="checkbox" value="5"></li>
 </ul>
-<table border="1" class="originTable">
-<thead>
- <tr>
-  <td>이름</td>
-  <td>선수번호</td>
-  <td>소속팀</td>
-  <td>나이</td>
- </tr>
-</thead>
+</div>
+<div class="frame">
 
-<tbody class="lotteMember">
+<div class="memberList">
+<table border="1" >
+<thead>
+</thead>
+<tbody class="player">
  </tbody>
 </table>
+</div>
 
-
+</div>
 
 </body>
 
 <script>
 var type=0
-var count=0
 
+/* 롯데 */
 $("#lotte").click(function(){
-	count++;
-	if(count%2==1){
+	var check=$("#lotte").prop("checked");
+	if(check==true){
 type=1
 	$.ajax({
 		method:"GET",
@@ -54,7 +52,43 @@ type=1
 		dataType:'json',
 		success:function(data){
 			console.log(data);
-			createTable(data);
+			$(".memberList").remove();
+			$newMemberList1=(
+					"<div class='newMemberList1'>"+
+					    "<table border='1' >"+
+					        "<thead>"+
+					            " <tr>"+
+					                "<td>이름</td>"+
+					                "<td>선수번호</td>"+
+					                "<td>소속팀</td>"+
+					                "<td>나이</td>"+
+					            "</tr>"+
+					        "</thead>"+
+					        "<tbody class='player1'>"+
+					        "</tbody>"+
+					    "</table>"+
+					"</div>"
+					);
+
+			$(".frame").append($newMemberList1);
+			
+			 for(let list of data){
+				 for(i=0; i<list.players.length;i++){
+					 console.log(list.players[1].id);
+					 let $newRow=$(
+							"<tr>"+
+							 "<td><a href='player/detail/"+list.players[i].id+"'>"+list.players[i].pname+"</a></td>"+
+							   "<td>"+list.players[i].pno+"</td>"+
+								"<td>"+list.tname+"</td>"+
+								"<td>"+list.players[i].page+"</td>"+
+								"</tr>"
+								
+							);
+					 $(".player1").append($newRow);
+						}
+				
+				
+			}
 			},
 		error:function(data){
 				alert("error")
@@ -68,8 +102,8 @@ type=1
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				$(".lotteMember").remove();
-				$(".newTbody").remove();
+				$(".newMemberList1").remove();
+				
 				},
 			error:function(data){
 					alert("error")
@@ -79,17 +113,53 @@ type=1
 	
 });
 
-$("#samsung").click(function(){
-	count++;
-	if(count%2==1){
+/* 삼성 */
+$("#samsung").click(function(){ 
+var check=$("#samsung").prop("checked");
+if(check==true){
 type=2
 	$.ajax({
 		method:"GET",
 		url:"testplayer?type="+type,
 		dataType:'json',
 		success:function(data){
-			console.log(data);
-			createTable(data);
+			$(".memberList").remove();
+			$newMemberList2=(
+					"<div class='newMemberList2'>"+
+					    "<table border='1' >"+
+					        "<thead>"+
+					            " <tr>"+
+					                "<td>이름</td>"+
+					                "<td>선수번호</td>"+
+					                "<td>소속팀</td>"+
+					                "<td>나이</td>"+
+					            "</tr>"+
+					        "</thead>"+
+					        "<tbody class='player2'>"+
+					        "</tbody>"+
+					    "</table>"+
+					"</div>"
+					);
+
+			$(".frame").append($newMemberList2);
+			
+			 for(let list of data){
+				 for(i=0; i<list.players.length;i++){
+					 console.log(list.players[1].id);
+					 let $newRow=$(
+							"<tr>"+
+							 "<td><a href='player/detail/"+list.players[i].id+"'>"+list.players[i].pname+"</a></td>"+
+							   "<td>"+list.players[i].pno+"</td>"+
+								"<td>"+list.tname+"</td>"+
+								"<td>"+list.players[i].page+"</td>"+
+								"</tr>"
+								
+							);
+					 $(".player2").append($newRow);
+						}
+				
+				
+			}
 			},
 		error:function(data){
 				alert("error")
@@ -103,8 +173,7 @@ type=2
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				$(".lotteMember").remove();
-				$(".newTbody").remove();
+				$(".newMemberList2").remove();
 				},
 			error:function(data){
 					alert("error")
@@ -114,17 +183,51 @@ type=2
 	
 });
 
-$("#KIA").click(function(){
-	count++;
-	if(count%2==1){
+/* 기아 */
+$("#KIA").click(function(){  
+var check=$("#KIA").prop("checked");
+	if(check==true){
 type=3
 	$.ajax({
 		method:"GET",
 		url:"testplayer?type="+type,
 		dataType:'json',
 		success:function(data){
-			console.log(data);
-			createTable(data);
+			$(".memberList").remove();
+			$newMemberList3=(
+					"<div class='newMemberList3'>"+
+					    "<table border='1' >"+
+					        "<thead>"+
+					            " <tr>"+
+					                "<td>이름</td>"+
+					                "<td>선수번호</td>"+
+					                "<td>소속팀</td>"+
+					                "<td>나이</td>"+
+					            "</tr>"+
+					        "</thead>"+
+					        "<tbody class='player3'>"+
+					        "</tbody>"+
+					    "</table>"+
+					"</div>"
+					);
+
+			$(".frame").append($newMemberList3);
+			
+			for(let list of data){
+				 for(i=0; i<list.players.length;i++){
+					 console.log(list.players[1].id);
+					 let $newRow=$(
+							"<tr>"+
+							 "<td><a href='player/detail/"+list.players[i].id+"'>"+list.players[i].pname+"</a></td>"+
+							   "<td>"+list.players[i].pno+"</td>"+
+								"<td>"+list.tname+"</td>"+
+								"<td>"+list.players[i].page+"</td>"+
+								"</tr>"
+								
+							);
+					 $(".player3").append($newRow);
+						}
+			      }
 			},
 		error:function(data){
 				alert("error")
@@ -138,28 +241,60 @@ type=3
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				$(".lotteMember").remove();
-				$(".newTbody").remove();
+				$(".newMemberList3").remove();
 				},
 			error:function(data){
 					alert("error")
 				}
 			});
 		}
-	
 });
 
+/* SK */
 $("#SK").click(function(){
-	count++;
-	if(count%2==1){
+	var check=$("#SK").prop("checked");
+	if(check==true){
 type=4
 	$.ajax({
 		method:"GET",
 		url:"testplayer?type="+type,
 		dataType:'json',
 		success:function(data){
-			console.log(data);
-			createTable(data);
+			$(".memberList").remove();
+			$newMemberList4=(
+					"<div class='newMemberList4'>"+
+					    "<table border='1' >"+
+					        "<thead>"+
+					            " <tr>"+
+					                "<td>이름</td>"+
+					                "<td>선수번호</td>"+
+					                "<td>소속팀</td>"+
+					                "<td>나이</td>"+
+					            "</tr>"+
+					        "</thead>"+
+					        "<tbody class='player4'>"+
+					        "</tbody>"+
+					    "</table>"+
+					"</div>"
+					);
+
+			$(".frame").append($newMemberList4);
+			
+			 for(let list of data){
+				 for(i=0; i<list.players.length;i++){
+					 console.log(list.players[1].id);
+					 let $newRow=$(
+							"<tr>"+
+							 "<td><a href='player/detail/"+list.players[i].id+"'>"+list.players[i].pname+"</a></td>"+
+							   "<td>"+list.players[i].pno+"</td>"+
+								"<td>"+list.tname+"</td>"+
+								"<td>"+list.players[i].page+"</td>"+
+								"</tr>"
+								
+							);
+					 $(".player4").append($newRow);
+						}
+               	}
 			},
 		error:function(data){
 				alert("error")
@@ -167,34 +302,66 @@ type=4
 		});
 	}
 	else{
-		type=4
+		type=3
 		$.ajax({
 			method:"GET",
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				$(".lotteMember").remove();
-				$(".newTbody").remove();
+				$(".newMemberList4").remove();
 				},
 			error:function(data){
 					alert("error")
 				}
 			});
 		}
-	
 });
 
+
 $("#han").click(function(){
-	count++;
-	if(count%2==1){
+	var check=$("#han").prop("checked");
+	if(check==true){
 type=5
 	$.ajax({
 		method:"GET",
 		url:"testplayer?type="+type,
 		dataType:'json',
 		success:function(data){
-			console.log(data);
-			createTable(data);
+			$(".memberList").remove();
+			$newMemberList5=(
+					"<div class='newMemberList5'>"+
+					    "<table border='1' >"+
+					        "<thead>"+
+					            " <tr>"+
+					                "<td>이름</td>"+
+					                "<td>선수번호</td>"+
+					                "<td>소속팀</td>"+
+					                "<td>나이</td>"+
+					            "</tr>"+
+					        "</thead>"+
+					        "<tbody class='player5'>"+
+					        "</tbody>"+
+					    "</table>"+
+					"</div>"
+					);
+
+			$(".frame").append($newMemberList5);
+			
+			for(let list of data){
+				 for(i=0; i<list.players.length;i++){
+					 console.log(list.players[1].id);
+					 let $newRow=$(
+							"<tr>"+
+							 "<td><a href='player/detail/"+list.players[i].id+"'>"+list.players[i].pname+"</a></td>"+
+							   "<td>"+list.players[i].pno+"</td>"+
+								"<td>"+list.tname+"</td>"+
+								"<td>"+list.players[i].page+"</td>"+
+								"</tr>"
+								
+							);
+					 $(".player5").append($newRow);
+						}
+ 			      }
 			},
 		error:function(data){
 				alert("error")
@@ -208,25 +375,40 @@ type=5
 			url:"testplayer?type="+type,
 			dataType:'json',
 			success:function(data){
-				$(".lotteMember").remove();
-				$(".newTbody").remove();
+				$(".newMemberList5").remove();
 				},
 			error:function(data){
 					alert("error")
 				}
 			});
 		}
-	
 });
 
-function createTable(data){
-	$(".lotteMember").remove();
-	$(".newTbody").remove();
-	$newTbody=$("<tbody class='newTbody'></tbody>");
-	$(".originTable").append($newTbody);
 
+
+
+function createTable(data){
+	$(".memberList").remove();
+	$newMemberList2=(
+			"<div class='newMemberList2'>"+
+			    "<table border='1' >"+
+			        "<thead>"+
+			            " <tr>"+
+			                "<td>이름</td>"+
+			                "<td>선수번호</td>"+
+			                "<td>소속팀</td>"+
+			                "<td>나이</td>"+
+			            "</tr>"+
+			        "</thead>"+
+			        "<tbody class='player2'>"+
+			        "</tbody>"+
+			    "</table>"+
+			"</div>"
+			);
+
+	$(".newMemberList1").append($newMemberList2);
+	
 	 for(let list of data){
-	//<a href="/player/detail/${list.players[0].pname}"></a>
 		let $newRow=$(
 				"<tr>"+
 				   "<td>"+list.players[0].pname+"</td>"+
@@ -235,8 +417,9 @@ function createTable(data){
 					"<td>"+list.players[0].page+"</td>"+
 					"</tr>"
 				);
-		$newTbody.append($newRow);
+		$(".player2").append($newRow);
 	}
+	
 	/* for(let list of data){
 		var players=list.players[0];
 			console.log("선수이름"+players.id);

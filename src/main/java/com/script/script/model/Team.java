@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Team {
 
-	private int id;
+	private int tid;
 	private String tName;
 	private String tYear;
 	private List<Player> players;
